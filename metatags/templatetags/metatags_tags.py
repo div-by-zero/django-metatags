@@ -24,7 +24,7 @@ def meta(obj=None, meta={}):
                 content_type=ContentType.objects.get_for_model(obj.__class__),
                 object_id=obj.pk
             )
-        except (AttributeError, IndexError):
+        except (AttributeError, IndexError, models.MetaTag.DoesNotExist):
             meta_tags = None
         if app_settings.METATAGS_CACHE_TTL:
             cache.set(cachename, meta_tags, app_settings.METATAGS_CACHE_TTL)
