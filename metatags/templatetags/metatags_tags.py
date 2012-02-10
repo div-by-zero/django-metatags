@@ -20,7 +20,7 @@ def meta(obj=None, meta={}):
     meta_tags = cache.get(cachename)
     if not meta_tags:
         try:
-            meta_tags = MetaTag.objects.get(
+            meta_tags = models.MetaTag.objects.get(
                 content_type=ContentType.objects.get_for_model(obj.__class__),
                 object_id=obj.pk
             )

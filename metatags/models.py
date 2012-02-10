@@ -10,7 +10,7 @@ class MetaTag(models.Model):
     """
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField(db_index=True)
-    content_object = generic.GenericForeignKey('content_type', 'object_id')
+    content_object = generic.GenericForeignKey()
     keywords = models.CharField(_('Keywords'),
         max_length=500,
         blank=True,
@@ -24,7 +24,6 @@ class MetaTag(models.Model):
     description = models.TextField(_('Description'),
         max_length=250,
         blank=True,
-        null=False,
         help_text=(
             'A short description of the content of the page. If left blank, '
             'will use the site-wide default. Maximum 250 characters, please '
@@ -86,4 +85,4 @@ class MetaTag(models.Model):
         verbose_name_plural = _('meta tags')
     
     def __unicode__(self):
-        return 'Meta tags for %s "%s"' % (self.content_type, self.tagged_item,)
+        return 'Meta tags for %s "%s"' % (self.content_type, self.content_object,)
