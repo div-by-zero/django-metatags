@@ -7,12 +7,15 @@ from metatags import app_settings, models
 register = template.Library()
 
 @register.inclusion_tag('metatags/meta_tags.html')
-def meta(obj=None, meta={}):
+def meta(obj=None, meta=None):
     """
     Template tag to generate meta tags. Takes an optional parameter of a 
     template object to pull the tags from. If not passed, it will return the 
     default meta tags, as set in their respective templates.
     """
+    if meta:
+        return { 'meta_tags': meta }
+
     cachename = obj and 'metatags_%s_%s' % (
         obj.__class__.__name__,
         obj.id
@@ -28,4 +31,4 @@ def meta(obj=None, meta={}):
             meta_tags = None
         if app_settings.METATAGS_CACHE_TTL:
             cache.set(cachename, meta_tags, app_settings.METATAGS_CACHE_TTL)
-    return { 'meta_tags': meta }
+    return { 'meta_tags': meta_tags }
