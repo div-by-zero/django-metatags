@@ -7,7 +7,7 @@ from metatags import app_settings, models
 
 register = template.Library()
 
-@register.inclusion_tag(settings.get('METATAGS_TEMPLATE', 'metatags/meta_tags.html'))
+@register.inclusion_tag(getattr(settings, 'METATAGS_TEMPLATE', 'metatags/meta_tags.html'))
 def meta(obj=None, meta=None):
     """
     Template tag to generate meta tags. Takes an optional parameter of a 
