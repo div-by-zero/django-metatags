@@ -11,6 +11,11 @@ class MetaTag(models.Model):
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField(db_index=True)
     content_object = generic.GenericForeignKey()
+    title = models.CharField(_('Title'),
+        max_length=500,
+        blank=True,
+        null=True
+    )
     keywords = models.CharField(_('Keywords'),
         max_length=500,
         blank=True,
