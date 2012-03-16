@@ -1,12 +1,13 @@
 from django import template
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
+from django.conf import settings
 
 from metatags import app_settings, models
 
 register = template.Library()
 
-@register.inclusion_tag('metatags/meta_tags.html')
+@register.inclusion_tag(settings.get('METATAGS_TEMPLATE', 'metatags/meta_tags.html'))
 def meta(obj=None, meta=None):
     """
     Template tag to generate meta tags. Takes an optional parameter of a 
