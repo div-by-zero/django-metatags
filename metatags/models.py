@@ -77,12 +77,13 @@ class MetaTag(models.Model):
             'follow': self.follow,
             'snippet': self.snippet
         }
+        r = [] + robots
         for key, value in props.items():
             if value:
-                robots.append(key)
+                r.append(key)
             else:
-                robots.append('no%s' % key)
-        return ','.join(robots)
+                r.append('no%s' % key)
+        return ','.join(r)
     
     class Meta:
         unique_together = (('content_type', 'object_id'),)
